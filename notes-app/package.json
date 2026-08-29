@@ -1,0 +1,14 @@
+{
+  "name": "my-notes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A private, offline-first notes app (PWA) for your own devices.",
+  "scripts": {
+    "serve": "node -e \"const{createServer}=require('http'),{readFile}=require('fs/promises'),{join,extname,normalize}=require('path');const M={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.png':'image/png'};createServer(async(q,s)=>{try{let p=decodeURIComponent(q.url.split('?')[0]);if(p==='/')p='/index.html';const f=join(__dirname,normalize(p).replace(/^(\\.\\.[/\\\\])+/,''));const b=await readFile(f);s.writeHead(200,{'Content-Type':M[extname(f)]||'application/octet-stream'});s.end(b)}catch{s.writeHead(404);s.end('not found')}}).listen(8080,()=>console.log('http://localhost:8080'))\"",
+    "test": "node tests/e2e.mjs",
+    "shots": "node tests/screenshots.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.1"
+  }
+}
